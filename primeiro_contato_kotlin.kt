@@ -207,6 +207,7 @@ fun main(){
 
 /////////////////////////////////////////////////////////
 
+//ranges
 fun main() {
     for( i in 0..3){
         print(i)
@@ -251,6 +252,7 @@ fun main() {
 
 /////////////////////////////////////////////////////////
 
+//setOf
 fun main() {
     val atores = setOf("1", "2", "3")
     val escritores = setOf("1", "2", "3")
@@ -266,6 +268,7 @@ fun main() {
 
 /////////////////////////////////////////////////////////
 
+//mutableList list collection
 val Users: MutableList<Int> = mutableListOf(1,2,3)
 val aux: List<Int> = Users
 
@@ -286,6 +289,7 @@ fun main(){
 
 /////////////////////////////////////////////////////////
 
+//mutableSet set collection
 val Users: MutableSet<String> = mutableSetOf("un1","un2","un3")
 
 fun addUsers(newUser: String): Boolean{
@@ -306,6 +310,7 @@ fun main(){
 
 /////////////////////////////////////////////////////////
 
+//mutableMap map collection
 const val POINT_X: Int = 15
 val Accounts: MutableMap<Int, Int> = mutableMapOf(1 to 100, 2 to 100, 3 to 100)
 val Report: Map<Int, Int> = Accounts
@@ -336,6 +341,7 @@ fun main(){
 
 /////////////////////////////////////////////////////////
 
+//filter e map function collection
 fun main() {
    val num = listOf(1,-2,3,-4,-5)
    val positivos = num.filter{x -> x>0}
@@ -350,6 +356,7 @@ fun main() {
 
 /////////////////////////////////////////////////////////
 
+//map e flatmap function collection
 fun main() {
    val fruit = listOf("apple","orange","banana")
    val clothe = listOf("shirt","pants","short")
@@ -363,6 +370,7 @@ fun main() {
 
 /////////////////////////////////////////////////////////
 
+//herança e passagem de arrgumentos p superclassex
 open class Dog{
     open fun say(){
         println("au au")
@@ -382,6 +390,7 @@ fun main(){
 
 /////////////////////////////////////////////////////////
 
+//herança e passagem de arrgumentos p superclassex
 open class Tigre(val origem: String){
     open fun local(){
         println("Tigre localizado: $origem.")
@@ -397,6 +406,7 @@ fun main(){
 
 /////////////////////////////////////////////////////////
 
+//herança e passagem de arrgumentos p superclasse
 open class Leao(val nome: String, val origem: String){
     open fun local(){
         println("$nome. Leão localizado: $origem.")
@@ -412,6 +422,7 @@ fun main(){
 
 /////////////////////////////////////////////////////////
 
+//data class
 data class User(val nome: String, val id: Int){
     override fun equals(other: Any?) = 
         other is User && other.id == this.id
@@ -440,6 +451,7 @@ fun main(){
 
 /////////////////////////////////////////////////////////
     
+//enum class
 enum class State{
     ESPERA, EXECUTANDO, FINALIZADO
 }
@@ -456,6 +468,7 @@ fun main(){
 
 /////////////////////////////////////////////////////////
 
+//enum class
 enum class Cor(val rgb: Int){
     RED(0xFF0000),
     GREEN(0x00FF00),
@@ -475,6 +488,7 @@ fun main(){
 
 /////////////////////////////////////////////////////////
 
+//sealed class
 sealed class Animal(val nome: String)
 
 class Cat(nomeCat: String) : Animal(nomeCat)
@@ -497,6 +511,7 @@ fun main() {
 
 /////////////////////////////////////////////////////////
 
+//objject keyword
 class BigBen{
     companion object Bonger{
         fun getBong(n: Int){
@@ -532,6 +547,7 @@ fun main(){
 
 /////////////////////////////////////////////////////////
 
+//escopo let
 fun custonP(s: String){
     print(s.uppercase())
 }
@@ -568,6 +584,7 @@ fun main(){
 
 /////////////////////////////////////////////////////////
 
+//escopo run
 fun main(){
     fun getNullableTam(str: String?) : Int{
         println("for \"$str\":")
@@ -584,6 +601,7 @@ fun main(){
 
 /////////////////////////////////////////////////////////
 
+//escopo with
 class Configuration(val host: String, val port: Int)
 
 fun main() {
@@ -598,45 +616,217 @@ fun main() {
 
 /////////////////////////////////////////////////////////
 
+//escopo apply
+data class Pessoa(var nome: String, var idade: Int, var sobre: String){
+    constructor() : this("",0,"")
+}
+
+fun main(){
+    val jake = Pessoa()
+    val pessoaDescr = jake.apply{
+        nome = "Jake"
+        idade = 50
+        sobre = "Runner"
+    }.toString()
+    println(pessoaDescr)
+}
+
+/////////////////////////////////////////////////////////
+
+//escopo also
+data class Pessoa(var nome: String, var idade: Int, var sobre: String){
+    constructor() : this("",0,"")
+}
+
+fun escrevendo(p: Pessoa){
+    println("Nova pessoa: ${p.nome} nasceu")
+}
+
+fun main(){
+    val jake = Pessoa("Jake", 50, "Runner").also{
+        escrevendo(it)
+    }
+ 
+}
+
+/////////////////////////////////////////////////////////
+
+//infinx functions
+fun main() {
+    infix fun Int.times(str: String) = str.repeat(this)
+    println(5 times "Bye ")
+    
+    val pair = "Uno" to "Two" to "Tier" to "Master"
+    println(pair)
+    
+    infix fun String.onto(str: String) = Pair(this, str)
+    val myPair = "Four" onto "Five" to "Tier" to "Master"
+    println(myPair)
+    
+    val luis = Pessoa("Luis")
+    val miu = Pessoa("Miu")
+    luis likes miu
+}
+class Pessoa(val nome: String){
+    val likedPessoa = mutableListOf<Pessoa>()
+    infix fun likes(p: Pessoa){ likedPessoa.add(p) }
+}
+
+/////////////////////////////////////////////////////////
+
+//operator funcions
+fun main() {
+    operator fun Int.times(str: String) = str.repeat(this)
+    println(2* "Bye ")
+    
+    operator fun String.get(range: IntRange) = substring(range)
+    val str = "SEMPRE FAÇA OQ TIVER DE SER FEITO PARA FINALIZAR."
+    println(str[0..19])
+
+}
+
+/////////////////////////////////////////////////////////
+
+//high order functions
+fun calculate(x: Int, y: Int, operation: (Int,Int) -> Int) : Int{
+    return operation(x,y)
+}   
+
+fun sum(x:Int, y: Int) = x + y
+
+fun main(){
+    var sum = calculate(4,5, ::sum)
+    var mult = calculate(5, 6, {a, b -> a * b})
+    
+    println(sum)
+    println(mult)
+}
+
+/////////////////////////////////////////////////////////
+
+//lambda functions
+fun main(){
+    val upperCase1 : (String) -> String = {str: String -> str.uppercase()}
+    val upperCase2 : (String) -> String = {str -> str.uppercase()}
+    val upperCase3 = {str: String -> str.uppercase()} 
+    val upperCase4 : (String) -> String = {it.uppercase()} 
+    val upperCase5 : (String) -> String = String::uppercase 
+    println(upperCase1("ola amigos"))
+    println(upperCase2("ola amigos"))
+    println(upperCase3("ola amigos"))
+    println(upperCase4("ola amiigos"))
+    println(upperCase5("ola amiigos"))
+    
+}
+
+/////////////////////////////////////////////////////////
+
+//extension functions and properties
+data class Item(val name: String, val price: Float)                                         // 1  
+
+data class Order(val items: Collection<Item>)  
+
+fun Order.maxPricedItemValue(): Float = this.items.maxByOrNull { it.price }?.price ?: 0F    // 2  
+fun Order.maxPricedItemName() = this.items.maxByOrNull { it.price }?.name ?: "NO_PRODUCTS"
+
+val Order.commaDelimitedItemNames: String                                                   // 3
+    get() = items.map { it.name }.joinToString()
+
+fun main() {
+
+    val order = Order(listOf(Item("Bread", 25.0F), Item("Wine", 29.0F), Item("Water", 12.0F)))
+    
+    println("Item com preço maior: ${order.maxPricedItemName()}")                           // 4
+    println("preço do item: ${order.maxPricedItemValue()}")
+    println("Items: ${order.commaDelimitedItemNames}")                                      // 5
+
+}
+
+/////////////////////////////////////////////////////////
+
+//extension functions generic
+fun <T> T?.nullSafeToString() = this?.toString() ?: "ausente"  // 1
+
+fun main() {
+    println(null.nullSafeToString())
+    println("Kotlin .".nullSafeToString())
+}
+
+/////////////////////////////////////////////////////////
+
+//suspend functions
+import kotlinx.coroutines.*
+
+
+fun main() = runBlocking {
+    doWorld()
+}
+
+suspend fun doWorld() = coroutineScope {
+    launch {
+        delay(1000L)
+        println("World!")
+    }
+    print("Hello ")
+}
+
+/////////////////////////////////////////////////////////
+
+//exception
+fun main(){
+    val a = 10
+    val b = 0
+
+    // val div : Any? = try { a/b } catch(e: ArithmeticException) { 0 }
+    // println(div)
+
+    try{
+        val div = a/b
+        println(div)
+    }catch(e: ArithmeticException){
+        println("Erro artimetico . \n" + e.message)
+    }catch(e: Throwable){
+        println(e.message)
+    }finally{
+        println("Chegou no finally")
+    }
+}
+
+/////////////////////////////////////////////////////////
+
+//exception
+class IllegalTicketException(msg: String) : Throwable(msg)
+
+@Throws(IllegalTicketException::class)
+fun ticket(nome: String, idade: Int) {
+    if (idade < 18) {
+        throw IllegalTicketException("$nome não pode usar o ticket")
+    }
+    println("[Ticket: $nome/$idade anos]")
+}
+
+fun main() {
+    var qntTickets = 0 
+    qntTickets += try { ticket("Luis", 26); 1 } catch (e: IllegalTicketException) { 0 }
+    qntTickets += try { ticket("Luisi", 17); 1 } catch (e: IllegalTicketException) { 0 }
+    qntTickets += try { ticket("Luiz", 50); 1 } catch (e: IllegalTicketException) { 0 }
+    println(qntTickets)
+}
 
 
 /////////////////////////////////////////////////////////
 
+//exception
+data class Pessoa(val nome: String?)
+fun erro(msg: String): Nothing{
+    throw IllegalArgumentException(msg)
+}
 
-/////////////////////////////////////////////////////////
-
-
-
-/////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////
-
-
-
-/////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////
-
-
-
-/////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////
-
-
-
-/////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////
-
-
-
-/////////////////////////////////////////////////////////
-
+fun main(){
+    val pessoa = Pessoa(null)
+    val s = pessoa.nome ?: erro("Insira o nome")
+    println(s)
+}
 
 /////////////////////////////////////////////////////////
 
