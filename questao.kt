@@ -32,8 +32,8 @@ class Formacao(val nome: String,
 }
 
 fun main() {
-    val professor1 = Professor("Dr. Silva")
-    val professor2 = Professor("Profa. Oliveira")
+    val professor1 = Professor("Joao")
+    val professor2 = Professor("Marcos")
 
     val usuario1 = Usuario("Luis")
     val usuario2 = Usuario("Luiz")
