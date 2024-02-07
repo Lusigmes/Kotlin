@@ -14,18 +14,13 @@ fun main() {
     var resultado = 0
 
     for (i in numeroRomano!!.indices) {
-        // Recupera o valor em romano do índice atual.
         val atual = numerosRomanos.getValue(numeroRomano[i])
 
-        // Recupera o valor em romano do próximo índice (caso exista).
         val proximo = when (i + 1) {
-            // Caso o próximo índice não exista, atribui 0 à variável $proximo.
             numeroRomano.length -> 0
-            // Caso contrário, atribui o valor em romano equivalente ao próximo índice.
             else -> numerosRomanos.getValue(numeroRomano[i + 1])
         }
 
-        // Verifica se o valor atual é menor que o próximo, se sim, subtrai do resultado.
         if (atual < proximo) {
             resultado -= atual
         } else {
@@ -35,3 +30,4 @@ fun main() {
 
     println(resultado)
 }
+    
